@@ -16,27 +16,31 @@
         </div>
         <div>
             <label for="pwd">Enter Password: </label>
-            <input type="password" id="pwd" name="pwd" required>
+            <input type="password" id="pwd" name="pwd" required placeholder="password">
+             <error-output class="password-error" for="pwd"></error-output>
         </div>
         <div>
             <label for="email" >Email ID: </label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" placeholder="abc@example.com">
+             <error-output class="email-error" for="email"></error-output>
         </div>
         <div>
-            <label for="url">URL : </label>
-            <input type="url" id="url" name="url">
+            <label for="url">URL: </label>
+             <input type="url" id="url" name="url" placeholder="https://example.com">
+             <error-output class="url-error" for="url"></error-output>
         </div>
         <div>
             <label for="number">Number input type: </label>
             <input type="number" id="number" name="number">
         </div>
         <div>
-            <label for="tel">Mobile no. : </label>
-            <input type="tel" id="tel" name="tel">
+            <label for="mobile">Mobile no. : </label>
+             <input type="mobile" id="mobile" name="mobile" placeholder="91 9999999999">
+             <error-output class="mobile-error" for="mobile"></error-output>
         </div>
         <div>
             <label for="search">Search input type: </label>
-            <input type="search" id="search" name="search">
+            <input type="search" id="search" name="search" placeholder="search">
         </div>
         <div class="nativeDateTimePicker">
             <label for="startDate">Choose a date and time: </label>
@@ -61,6 +65,38 @@
             textError.textContent="";
             else textError.textContent="Name is Incorrect";
         });
+        const email = document.querySelector('#email');
+         const emailError = document.querySelector('.email-error');
+         email.addEventListener('input',function(){
+             let emailRegex = RegExp('^[a-zA-Z0-9+_-]+([.][a-zA-Z0-9]+)*@([a-zA-Z0-9]+)([.][a-z]+)?[.][a-z]{2,}$');
+             if(emailRegex.test(email.value))
+             emailError.textContent="";
+             else emailError.textContent="Email Id is Invalid";
+         });
+         const mobile = document.querySelector('#mobile');
+         const mobError = document.querySelector('.mobile-error');
+         mobile.addEventListener('input',function(){
+             let mobileRegex = RegExp('^[91]{2}[- ]{1}[7-9]{1}[0-9]{9}$');
+             if(mobileRegex.test(mobile.value))
+             mobError.textContent="";
+             else mobError.textContent="Invalid Mobile number";
+         });
+         const pwd = document.querySelector('#pwd');
+         const pwdError = document.querySelector('.password-error');
+         pwd.addEventListener('input',function(){
+             let passRegex = RegExp('^(?=.*\\d)(?=.*[A-Z])(?=.*\\W)(?!.*\\W\\w*\\W)(?!.*\\s).{8,}$');
+             if(passRegex.test(pwd.value))
+             pwdError.textContent="";
+             else pwdError.textContent="Invalid Password";          
+         });
+         const url = document.querySelector('#url');
+         const urlError = document.querySelector('.url-error');
+         url.addEventListener('input',function(){
+             let urlRegex = RegExp('^(https?|chrome):\/\/[^\s$.?#].[^\s]*$');
+             if(urlRegex.test(url.value))
+             urlError.textContent="";
+             else urlError.textError="Invalid URL."; 
+         });
         const salary = document.querySelector('#salary');
         const output = document.querySelector('.salary-output');
         output.textContent = salary.value;
